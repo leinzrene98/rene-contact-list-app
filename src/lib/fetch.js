@@ -24,6 +24,7 @@ export const addContact = async(name, address, phone, email, dispatch) => {
         address: address,
         phone: phone,
         email: email,
+        
     }
 
     const options = {

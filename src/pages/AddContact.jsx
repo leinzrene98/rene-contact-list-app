@@ -60,7 +60,9 @@ export const AddContact = () => {
                     <button
                         type="submit"
                         className='btn  btn-success'
-                        onClick={() => addContact(contactName, contactAddress, contactPhone, contactEmail, dispatch)}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            addContact(contactName, contactAddress, contactPhone, contactEmail, dispatch)}}
                     >Submit</button>
                 </form>
                 <Link to="/">
