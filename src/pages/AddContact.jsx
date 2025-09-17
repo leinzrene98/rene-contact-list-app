@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { addContact } from "../lib/fetch";
 import useGlobalReducer from "../hooks/useGlobalReducer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const AddContact = () => {
     const [contactName, setContactName] = useState('')
     const [contactAddress, setContactAddress] = useState('')
     const [contactPhone, setContactPhone] = useState('')
     const [contactEmail, setContactEmail] = useState('')
+    const navigate = useNavigate();
 
     const { store, dispatch } = useGlobalReducer();
 
@@ -16,7 +17,10 @@ export const AddContact = () => {
         <div className="row add-contact">
             <div className="col-2"></div>
             <div className="col-8">
-                <form className="contact-form">
+                <form className="contact-form" onSubmit={(e) => {
+                            e.preventDefault();
+                            addContact(contactName, contactAddress, contactPhone, contactEmail, dispatch);
+                            navigate("/")}}>
                     <div className="mb-3">
                     <label htmlFor="contactName" className="form-label">Full Name</label>
                     <input 
@@ -60,9 +64,9 @@ export const AddContact = () => {
                     <button
                         type="submit"
                         className='btn  btn-success'
-                        onClick={(e) => {
-                            e.preventDefault();
-                            addContact(contactName, contactAddress, contactPhone, contactEmail, dispatch)}}
+                        // onClick={(e) => {
+                        //     e.preventDefault();
+                        //     addContact(contactName, contactAddress, contactPhone, contactEmail, dispatch)}}
                     >Submit</button>
                 </form>
                 <Link to="/">
